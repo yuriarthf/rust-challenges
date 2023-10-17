@@ -29,8 +29,9 @@ fn handle_client(mut stream: TcpStream, queue: &mut VecDeque<String>) -> std::io
 
     let mut buffer = String::new();
     stream.read_to_string(&mut buffer)?;
-    if let Ok(command) = simple_db::parse(&buffer) {
-        match command {
+
+    match simple_db::parse(&buffer) {
+        Ok(command) => match command {
             simple_db::Command::Publish(payload) => {
                 queue.push_back(payload);
                 writeln!(stream, "Added to queue: {buffer:?}")?;
@@ -38,10 +39,9 @@ fn handle_client(mut stream: TcpStream, queue: &mut VecDeque<String>) -> std::io
             simple_db::Command::Retrieve => {
                 writeln!(stream, "Retrieved from queue: {:?}", queue.pop_front())?;
             }
-        }
-    } else {
-
+        },
+        Err(e) => writeln!(stream, "Error: {:?}", e)?,
     }
-    writeln!(stream, "Thank you for {buffer:?}!")?;
+
     Ok(())
 }
