@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "tcp_server",
+    "simple_db",
+]

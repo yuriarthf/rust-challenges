@@ -1,0 +1,1 @@
+C:\Users\yuria\learning\rust\rust-challenges\connected_mailbox\target\debug\tcp_server.exe: C:\Users\yuria\learning\rust\rust-challenges\connected_mailbox\simple_db\src\lib.rs C:\Users\yuria\learning\rust\rust-challenges\connected_mailbox\tcp_server\src\main.rs
